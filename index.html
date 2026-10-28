@@ -155,7 +155,7 @@ footer{padding-block:20px 50px;color:#9fbcb0;font-size:14px;border-top:1px solid
 <footer><div class="wrap">CEREPAL · Campanha Cartinhas do Papai Noel 2026. Dúvidas sobre entrega: fale com a organização pelo WhatsApp <b id="foot-phone"></b>.</div></footer>
 
 <dialog id="dlg" aria-labelledby="dlg-title">
-  <form class="dlg" id="dlg-form" method="dialog">
+  <form class="dlg" id="dlg-form" method="dialog" novalidate>
     <h3 id="dlg-title"></h3>
     <p id="dlg-sub"></p>
     <div class="field"><label for="godname">Seu nome</label><input id="godname" autocomplete="name" placeholder="Como você quer ser chamado(a)" required></div>
@@ -169,7 +169,7 @@ footer{padding-block:20px 50px;color:#9fbcb0;font-size:14px;border-top:1px solid
       <button type="button" class="btn btn-ghost" id="share-text">Copiar convite para compartilhar</button>
       <button type="button" class="btn btn-ghost" id="share-img" hidden>Baixar imagem da cartinha</button>
     </div>
-    <button type="submit" class="btn btn-ghost" id="dlg-close">Fechar</button>
+    <button type="button" class="btn btn-ghost" id="dlg-close">Fechar</button>
   </form>
 </dialog>
 <div class="toast" id="toast" hidden></div>
@@ -284,7 +284,10 @@ function openDlg(c, shareOnly){
   const d=$('#dlg'); if (d.showModal) d.showModal(); else d.setAttribute('open','');
 }
 $('#godname').addEventListener('input', updatePreview);
-$('#dlg-form').addEventListener('submit', e=>{ e.preventDefault(); $('#dlg').close ? $('#dlg').close() : $('#dlg').removeAttribute('open'); });
+function closeDlg(){ const d=$('#dlg'); if(d.close) d.close(); else d.removeAttribute('open'); }
+$('#dlg-form').addEventListener('submit', e=>{ e.preventDefault(); closeDlg(); });
+$('#dlg-close').addEventListener('click', closeDlg);
+$('#dlg').addEventListener('click', e=>{ if(e.target.id==='dlg') closeDlg(); });
 
 function copy(text, okMsg){
   const done=()=>toast(okMsg);
