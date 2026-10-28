@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Escolha uma cartinha e faça o Natal de um aluno do CEREPAL mais feliz.">
+<meta property="og:title" content="Cartinhas do Papai Noel – CEREPAL 2026">
+<meta property="og:description" content="66 cartinhas esperando um padrinho ou madrinha. Escolha a sua!">
+<meta property="og:type" content="website">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>Cartinhas CEREPAL 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Caveat:wght@500;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800&display=swap">
+<style>
+/* Layout: noite de Natal verde-pinheiro; cada cartinha é um papel de carta com selo numerado, em grade que vira coluna única no celular */
+:root{
+  --night:#0f2a22; --night-2:#163a2f; --pine:#1f4d3d;
+  --paper:#fbfaf5; --paper-line:#dfe6ef; --ink:#23302b; --ink-soft:#5b6a63;
+  --berry:#c0392b; --berry-deep:#962a1f; --gold:#e8b54a; --snow:#eef4f1;
+  --f-display:"Young Serif",Georgia,"Times New Roman",serif;
+  --f-hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+  --f-body:"Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--night);color:var(--snow);font-family:var(--f-body);font-size:16px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--night)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#snow{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55}
+main,header,footer{position:relative;z-index:1}
+
+header{padding-block:48px 28px}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:800}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,6vw,60px);line-height:1.05;margin:10px 0 14px;text-wrap:balance;max-width:16ch}
+h1 em{font-style:normal;color:var(--gold)}
+.lead{max-width:58ch;color:#cfe0d8;font-size:17px;margin:0}
+.how{display:flex;flex-wrap:wrap;gap:10px 22px;margin:22px 0 0;padding:0;list-style:none;color:#cfe0d8;font-size:15px}
+.how li{display:flex;gap:8px;align-items:baseline}
+.how b{font-family:var(--f-display);font-weight:400;color:var(--gold);font-size:18px}
+
+.progress{margin-top:30px;max-width:560px}
+.progress-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px}
+.progress-row strong{font-family:var(--f-display);font-weight:400;font-size:26px;color:var(--snow)}
+.bar{height:10px;border-radius:99px;background:var(--pine);margin-top:8px;overflow:hidden}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--berry),var(--gold));border-radius:99px;transition:width .6s ease}
+
+.tools{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--night) 92%,transparent);backdrop-filter:blur(6px);padding-block:12px;border-bottom:1px solid var(--pine)}
+.tools .wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;font-weight:600;border:1px solid var(--pine);background:var(--night-2);color:var(--snow);padding:7px 14px;border-radius:99px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--snow);color:var(--night);border-color:var(--snow)}
+.chip:focus-visible,.btn:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.search{flex:1 1 200px;min-width:0}
+.search input{width:100%;font:inherit;font-size:15px;padding:8px 14px;border-radius:99px;border:1px solid var(--pine);background:var(--night-2);color:var(--snow)}
+.search input::placeholder{color:#8fb0a3}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:26px 22px;padding-block:30px 60px}
+.letter{position:relative;background:var(--paper);color:var(--ink);border-radius:4px;padding:22px 22px 18px;
+  background-image:repeating-linear-gradient(transparent 0 29px,var(--paper-line) 29px 30px);background-position:0 70px;
+  box-shadow:0 1px 0 rgba(0,0,0,.08),0 14px 30px -14px rgba(0,0,0,.55);transform:rotate(var(--tilt,0deg));transition:transform .25s ease;display:flex;flex-direction:column;min-width:0}
+.letter:hover{transform:rotate(0deg) translateY(-3px)}
+.letter::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;border-radius:4px 4px 0 0;
+  background:repeating-linear-gradient(135deg,var(--berry) 0 10px,var(--paper) 10px 20px,var(--pine) 20px 30px,var(--paper) 30px 40px)}
+.stamp{position:absolute;top:16px;right:16px;width:58px;height:66px;background:var(--berry);color:var(--paper);display:grid;place-items:center;text-align:center;
+  font-family:var(--f-display);line-height:1;outline:2px dashed var(--paper);outline-offset:-6px}
+.stamp small{display:block;font-family:var(--f-body);font-size:10px;letter-spacing:.12em;font-weight:800}
+.stamp span{font-size:24px}
+.who{padding-right:70px}
+.who .hi{font-family:var(--f-hand);font-size:22px;color:var(--ink-soft);line-height:1}
+.who h2{font-family:var(--f-display);font-weight:400;font-size:27px;line-height:1.1;margin:4px 0 4px;overflow-wrap:anywhere}
+.meta{font-size:13px;color:var(--ink-soft);font-weight:600;letter-spacing:.02em}
+.wish-title{font-family:var(--f-hand);font-size:22px;margin:16px 0 0;color:var(--berry-deep);line-height:30px}
+.wishes{list-style:none;margin:0 0 14px;padding:0;font-family:var(--f-hand);font-size:23px;line-height:30px;color:#1d3b6b;flex:1}
+.wishes li::before{content:"✶ ";color:var(--gold)}
+.letter .actions{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.btn{font:inherit;font-weight:800;font-size:15px;border:0;border-radius:6px;padding:11px 14px;cursor:pointer;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-primary{background:var(--berry);color:#fff}
+.btn-primary:hover{background:var(--berry-deep)}
+.btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--paper-line);font-weight:600;font-size:14px;padding:8px 12px}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink-soft)}
+.letter.adopted .wishes{opacity:.55}
+.adopted-mark{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-12deg);border:4px double var(--berry);color:var(--berry);
+  font-family:var(--f-display);font-size:26px;padding:6px 16px;border-radius:8px;background:rgba(251,250,245,.86);text-align:center;line-height:1.1;pointer-events:none;white-space:nowrap}
+.adopted-mark small{display:block;font-family:var(--f-hand);font-size:22px;color:var(--ink)}
+.empty{grid-column:1/-1;text-align:center;color:#cfe0d8;padding:40px 0}
+
+/* painel da organização */
+.admin{display:flex;flex-direction:column;gap:6px;border-top:1px dashed var(--paper-line);padding-top:10px;margin-top:6px}
+.admin label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.admin-row{display:flex;gap:6px}
+.admin input{flex:1;min-width:0;font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--paper-line);border-radius:6px;background:#fff;color:var(--ink)}
+.admin .btn{font-size:13px;padding:7px 10px}
+.btn-pine{background:var(--pine);color:#fff}
+.adminbar{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gold);font-weight:700}
+
+/* modal */
+dialog{border:0;padding:0;max-width:min(520px,calc(100vw - 32px));width:100%;border-radius:10px;background:var(--paper);color:var(--ink);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+dialog::backdrop{background:rgba(5,20,15,.72)}
+.dlg{padding:26px 24px 22px;display:flex;flex-direction:column;gap:14px}
+.dlg h3{font-family:var(--f-display);font-weight:400;font-size:26px;margin:0;line-height:1.15}
+.dlg p{margin:0;color:var(--ink-soft)}
+.dlg .field{display:flex;flex-direction:column;gap:4px}
+.dlg label{font-size:13px;font-weight:800;color:var(--ink)}
+.dlg input{font:inherit;padding:10px 12px;border:1px solid #c9d2cd;border-radius:6px;background:#fff;color:var(--ink)}
+.dlg .row{display:flex;flex-wrap:wrap;gap:8px}
+.dlg .row .btn{flex:1 1 180px}
+.msg-preview{font-size:14px;background:#eef3ef;border-radius:6px;padding:10px 12px;white-space:pre-wrap;color:var(--ink)}
+.phone{font-size:14px;color:var(--ink-soft)}
+.phone b{color:var(--ink);user-select:all}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--snow);color:var(--night);padding:10px 18px;border-radius:99px;font-weight:700;z-index:50;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+
+footer{padding-block:20px 50px;color:#9fbcb0;font-size:14px;border-top:1px solid var(--pine)}
+@media (max-width:520px){ .letter{--tilt:0deg!important} header{padding-block:32px 20px} .tools{position:static} }
+@media (prefers-reduced-motion:reduce){ #snow{display:none} .letter,.bar span{transition:none} }
+</style>
+</head>
+<body>
+
+
+<canvas id="snow" aria-hidden="true"></canvas>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">CEREPAL · Natal 2026</div>
+    <h1>Cada cartinha é um <em>pedido de Natal</em> esperando por você</h1>
+    <p class="lead">Nossos alunos escreveram para o Papai Noel. Escolha uma cartinha, seja padrinho ou madrinha e faça o Natal de alguém mais feliz.</p>
+    <ul class="how">
+      <li><b>1</b> Escolha uma cartinha</li>
+      <li><b>2</b> Avise a organização pelo WhatsApp</li>
+      <li><b>3</b> Compre um ou mais pedidos e entregue</li>
+    </ul>
+    <div class="progress" aria-live="polite">
+      <div class="progress-row"><span><strong id="free-count">–</strong> cartinhas esperando padrinho</span><span id="adopted-count"></span></div>
+      <div class="bar"><span id="bar" style="width:0"></span></div>
+    </div>
+  </div>
+</header>
+
+<div class="tools">
+  <div class="wrap">
+    <div class="chips" role="group" aria-label="Filtrar cartinhas">
+      <button class="chip" id="f-free" data-f="free" aria-pressed="true">Disponíveis</button>
+      <button class="chip" id="f-kids" data-f="kids" aria-pressed="false">Até 12 anos</button>
+      <button class="chip" id="f-teen" data-f="teen" aria-pressed="false">13 a 17</button>
+      <button class="chip" id="f-adult" data-f="adult" aria-pressed="false">18+</button>
+      <button class="chip" id="f-all" data-f="all" aria-pressed="false">Todas</button>
+    </div>
+    <label class="search"><span hidden>Buscar</span><input id="q" type="search" placeholder="Buscar por nome ou presente (ex.: perfume, mochila)" autocomplete="off"></label>
+    <div class="adminbar" id="adminbar" hidden>
+      <button class="chip" id="admin-toggle" aria-pressed="false">Modo organização</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap"><div class="grid" id="grid"></div></main>
+
+<footer><div class="wrap">CEREPAL · Campanha Cartinhas do Papai Noel 2026. Dúvidas sobre entrega: fale com a organização pelo WhatsApp <b id="foot-phone"></b>.</div></footer>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <form class="dlg" id="dlg-form" method="dialog">
+    <h3 id="dlg-title"></h3>
+    <p id="dlg-sub"></p>
+    <div class="field"><label for="godname">Seu nome</label><input id="godname" autocomplete="name" placeholder="Como você quer ser chamado(a)" required></div>
+    <div class="msg-preview" id="msg-preview"></div>
+    <div class="row">
+      <a class="btn btn-primary" id="wa-link" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+      <button type="button" class="btn btn-ghost" id="copy-msg">Copiar mensagem</button>
+    </div>
+    <div class="phone">Se o WhatsApp não abrir, mande a mensagem para <b id="dlg-phone"></b>.</div>
+    <div class="row">
+      <button type="button" class="btn btn-ghost" id="share-text">Copiar convite para compartilhar</button>
+      <button type="button" class="btn btn-ghost" id="share-img" hidden>Baixar imagem da cartinha</button>
+    </div>
+    <button type="submit" class="btn btn-ghost" id="dlg-close">Fechar</button>
+  </form>
+</dialog>
+<div class="toast" id="toast" hidden></div>
+
+<script id="state" type="application/json">{"whatsapp": "+55 51 9505-8775", "cartas": [{"n": 1, "nome": "Giovanna", "turma": "T1M", "idade": 10, "pedidos": ["Blusinha ou vestido tamanho 12", "Bolsinha de Mão", "Perfume", "Manta macia colorida ou de Princesas"], "padrinho": ""}, {"n": 2, "nome": "Lorenzo B.", "turma": "T1M", "idade": 8, "pedidos": ["Mochila e necessaire", "Brinquedo Peppa Pig Musical", "Boné"], "padrinho": ""}, {"n": 3, "nome": "Milena", "turma": "T1M", "idade": 9, "pedidos": ["Roupa tamanho 10", "Mochila Guerreiros do KPOP e necessaire", "Microfone Bluetooth"], "padrinho": ""}, {"n": 4, "nome": "Rayssa", "turma": "T1M", "idade": 11, "pedidos": ["Brinquedo Musical", "Mochila", "Manta macia colorida ou de Princesas"], "padrinho": ""}, {"n": 5, "nome": "Bryan", "turma": "T2M", "idade": 12, "pedidos": ["Perfume", "Camiseta tamanho 12", "Bonés"], "padrinho": ""}, {"n": 6, "nome": "Isadora R.", "turma": "T2M", "idade": 12, "pedidos": ["Vestido tamanho 12", "Bolsinha de mão Rosa", "Fone de ouvido Bluetooth"], "padrinho": ""}, {"n": 7, "nome": "Lohran", "turma": "T2M", "idade": 13, "pedidos": ["Camiseta ou bermuda tamanho 10", "Caixinha de som", "Mochila e necessaire"], "padrinho": ""}, {"n": 8, "nome": "Patrick", "turma": "T2M", "idade": 12, "pedidos": ["Mochila e necessaire", "Teclado Infantil Musical", "Perfume"], "padrinho": ""}, {"n": 9, "nome": "Vitória V.", "turma": "T2M", "idade": 12, "pedidos": ["Perfume e Kit de cuidados pessoais", "Mochila e necessaire", "Vestido tamanho 12"], "padrinho": ""}, {"n": 10, "nome": "Heitor", "turma": "T1T", "idade": 9, "pedidos": ["Quebra-cabeça metalizado", "Piano infantil musical", "Tablet educativo infantil"], "padrinho": ""}, {"n": 11, "nome": "Leonardo I.", "turma": "T1T", "idade": 10, "pedidos": ["Tablet educativo infantil", "Notebook infantil ou leptop infantil", "Bola de vinil inflável (leve) médio"], "padrinho": ""}, {"n": 12, "nome": "Lorenzo B.", "turma": "T1T", "idade": 12, "pedidos": ["Bola de futebol", "Brinquedo musical", "Teclado Infantil Musical"], "padrinho": ""}, {"n": 13, "nome": "Sofia C.", "turma": "T1T", "idade": 13, "pedidos": ["Teclado infantil", "Toalhas de lavabo", "Laptop Infantil", "Bola de vinil média"], "padrinho": ""}, {"n": 14, "nome": "Sophia M.", "turma": "T1T", "idade": 12, "pedidos": ["Brinquedo Musical", "Mochila", "Brinquedos sensoriais com luzes"], "padrinho": ""}, {"n": 15, "nome": "Davi", "turma": "T2T", "idade": 12, "pedidos": ["Camiseta tamanho 12", "Mochila e necessaire", "Brinquedo Musical"], "padrinho": ""}, {"n": 16, "nome": "Eduarda P.", "turma": "T2T", "idade": 15, "pedidos": ["Mochila e necessaire", "Brinquedo Musical", "Acessórios para cabelo, escova e esmalte"], "padrinho": ""}, {"n": 17, "nome": "Juan P.", "turma": "T2T", "idade": 11, "pedidos": ["Bola de futebol", "Mochila e necessaire", "Brinquedo Musical"], "padrinho": ""}, {"n": 18, "nome": "João F.", "turma": "T2T", "idade": 15, "pedidos": ["Teclado Musical Infantil", "Brinquedo Musical", "Mochila e necessaire"], "padrinho": ""}, {"n": 19, "nome": "Bianca", "turma": "T2T", "idade": 13, "pedidos": ["Acessórios para cabelo e escova", "Mochila e necessaire", "Fone de ouvido Bluetooth", "Caixinha de som"], "padrinho": ""}, {"n": 20, "nome": "Bruno", "turma": "E1M", "idade": 15, "pedidos": ["Camiseta tamanho G", "Bonés", "Caixinha de som"], "padrinho": ""}, {"n": 21, "nome": "Guilherme L.", "turma": "E1M", "idade": 18, "pedidos": ["Camiseta tamanho M", "Boneco Articulado ( super herói)", "Perfume"], "padrinho": ""}, {"n": 22, "nome": "Hérika", "turma": "E1M", "idade": 20, "pedidos": ["Blusinha tamanho P", "Mochila", "Bermuda tamanho P"], "padrinho": ""}, {"n": 23, "nome": "Isabelly", "turma": "E1M", "idade": 20, "pedidos": ["Bolsinha", "Blusinha tamanho G", "Perfume"], "padrinho": ""}, {"n": 24, "nome": "Lucas", "turma": "E1M", "idade": 19, "pedidos": ["Camiseta tamanho M", "Bonés", "Perfume"], "padrinho": ""}, {"n": 25, "nome": "Luis H.", "turma": "E1M", "idade": 19, "pedidos": ["Camiseta tamanho P", "Bonés", "Perfume"], "padrinho": ""}, {"n": 26, "nome": "Melissa D.", "turma": "E1M", "idade": 16, "pedidos": ["Perfume", "Bolsinha de mão", "Blusinha tamanho M"], "padrinho": ""}, {"n": 27, "nome": "Nataly", "turma": "E1M", "idade": 18, "pedidos": ["Blusinha tamanho P", "Bolsinha de mão", "Perfume"], "padrinho": "Ivone"}, {"n": 28, "nome": "Vítor G.", "turma": "E1M", "idade": 20, "pedidos": ["Bolsinha de mão", "Bonés", "Perfume"], "padrinho": ""}, {"n": 29, "nome": "Wesley", "turma": "E1M", "idade": 18, "pedidos": ["Quebra-cabeça", "Kit jogo de pingue pong", "Lousa mágica com led"], "padrinho": ""}, {"n": 30, "nome": "Ana C.", "turma": "E1T", "idade": 16, "pedidos": ["Blusinha tamanho G", "Perfume", "Brinquedo Sensorial"], "padrinho": ""}, {"n": 31, "nome": "Ana L.", "turma": "E1T", "idade": 21, "pedidos": ["Bolsinha de mão", "Blusinha tamanho P", "Perfume"], "padrinho": ""}, {"n": 32, "nome": "Fernanda", "turma": "E1T", "idade": 26, "pedidos": ["Blusinha tamanho P", "Perfume", "Bolsinha de mão"], "padrinho": ""}, {"n": 33, "nome": "Gabriel F.", "turma": "E1T", "idade": 21, "pedidos": ["Camiseta tamanho P", "Perfume", "Boné Pescador"], "padrinho": ""}, {"n": 34, "nome": "Leonardo A.", "turma": "E1T", "idade": 22, "pedidos": ["Perfume", "Camiseta tamanho G", "Mochila"], "padrinho": ""}, {"n": 35, "nome": "Luis E.", "turma": "E1T", "idade": 19, "pedidos": ["Perfume", "Camiseta tamanho M", "Mochila"], "padrinho": ""}, {"n": 36, "nome": "Melissa F.", "turma": "E1T", "idade": 23, "pedidos": ["Quebra-cabeça para idade", "Bola de vinil média (leve)", "Brinquedo Sensorial"], "padrinho": ""}, {"n": 37, "nome": "Sofia L.", "turma": "E1T", "idade": 17, "pedidos": ["Quebra-cabeça de 100 peças", "Bola de vinil média (leve)", "Tablet educativo infantil"], "padrinho": ""}, {"n": 38, "nome": "Thiago E.", "turma": "E1T", "idade": 16, "pedidos": ["Tablet educativo infantil", "Bola voadora spinner", "Quebra-cabeça"], "padrinho": ""}, {"n": 39, "nome": "Isadora D.", "turma": "E1T", "idade": 17, "pedidos": ["Blusinha tamanho P", "Perfume", "Bolsinha de mão"], "padrinho": ""}, {"n": 40, "nome": "Vitória M.", "turma": "E1T", "idade": 25, "pedidos": ["Blusinha tamanho M", "Mochila", "Vestido tamanho P"], "padrinho": ""}, {"n": 41, "nome": "Leonardo F.", "turma": "E1T", "idade": 18, "pedidos": ["Tablet educativo infantil", "Laptop Infantil", "Bola voadora spinner"], "padrinho": ""}, {"n": 42, "nome": "Alexandre", "turma": "E3M", "idade": 26, "pedidos": ["Camiseta tamanho M", "Bonés", "Mochila"], "padrinho": ""}, {"n": 43, "nome": "Antônio", "turma": "E3M", "idade": 40, "pedidos": ["Camiseta tamanho G", "Bonés", "Bermudas tamanho G"], "padrinho": ""}, {"n": 44, "nome": "Edson", "turma": "E3M", "idade": 19, "pedidos": ["Camisetas tamanho GG", "Óculos de sol", "Boné", "Bermudas tamanho GG"], "padrinho": ""}, {"n": 45, "nome": "Jeferson", "turma": "E3M", "idade": 23, "pedidos": ["Camisetas tamanho G", "Tênis tamanho 41", "Bonés"], "padrinho": ""}, {"n": 46, "nome": "João V.", "turma": "E3M", "idade": 22, "pedidos": ["Camisetas tamanho P", "Tênis tamanho 30", "Bermuda tamanho P"], "padrinho": ""}, {"n": 47, "nome": "Matheus", "turma": "E3M", "idade": 25, "pedidos": ["Camisetas tamanho G", "Bonés", "Bermuda tamanho G"], "padrinho": ""}, {"n": 48, "nome": "Verônica", "turma": "E3M", "idade": 25, "pedidos": ["Blusas tamanho P", "Bermudas tamanho G", "Mochila"], "padrinho": ""}, {"n": 49, "nome": "Alexsandro", "turma": "E3T", "idade": 36, "pedidos": ["Tênis tamanho 43", "Mochila", "Perfume"], "padrinho": ""}, {"n": 50, "nome": "Eduarda R.", "turma": "E3T", "idade": 20, "pedidos": ["Lousa mágica fundo preto", "Bola de vinil média ou grande", "Tablet educativo infantil"], "padrinho": ""}, {"n": 51, "nome": "Estela", "turma": "E3T", "idade": 44, "pedidos": ["Perfumes", "Mochila", "Blusa tamanho G"], "padrinho": ""}, {"n": 52, "nome": "Ezequiel", "turma": "E3T", "idade": 25, "pedidos": ["Tênis tamanho 37", "Mochila", "Camisetas tamanho G"], "padrinho": ""}, {"n": 53, "nome": "Guilherme R.", "turma": "E3T", "idade": 36, "pedidos": ["Camisetas tamanho G", "Perfume", "Bermuda tamanho G"], "padrinho": ""}, {"n": 54, "nome": "Jackson", "turma": "E3T", "idade": 35, "pedidos": ["Tênis tamanho 41", "Camisetas tamanho G3", "Mochila"], "padrinho": ""}, {"n": 55, "nome": "Janaina", "turma": "E3T", "idade": 50, "pedidos": ["Estojo de Maquiagem", "Creme para as mãos", "Conjunto ou kit de acessórios para o cabelo"], "padrinho": "Cacau"}, {"n": 56, "nome": "Juliana", "turma": "E3T", "idade": 43, "pedidos": ["Mochila", "Tênis tamanho 30/31", "Bolsinha de mão preta"], "padrinho": ""}, {"n": 57, "nome": "Karen", "turma": "E3T", "idade": 25, "pedidos": ["Perfume da Luna ( Natura)", "Creme hidratante para o corpo Lily", "Bolsa de corrente preta transversal feminina"], "padrinho": ""}, {"n": 58, "nome": "Marcelo", "turma": "E3T", "idade": 33, "pedidos": ["Mochila", "Camisetas tamanho M", "Bermuda tamanho M"], "padrinho": ""}, {"n": 59, "nome": "Diego", "turma": "E4T", "idade": 42, "pedidos": ["Perfume do Boticário", "Boné", "Camiseta tamanho G"], "padrinho": ""}, {"n": 60, "nome": "Edgar", "turma": "E4T", "idade": 66, "pedidos": ["Camiseta tamanho GG", "Perfume", "Tênis tamanho 41"], "padrinho": ""}, {"n": 61, "nome": "Henrique", "turma": "E4T", "idade": 43, "pedidos": ["Mochila", "Perfume", "Camiseta tamanho G", "Tênis tamanho 41"], "padrinho": ""}, {"n": 62, "nome": "Márcio", "turma": "E4T", "idade": 51, "pedidos": ["Tênis número 37", "Boné", "Perfume"], "padrinho": ""}, {"n": 63, "nome": "Máximo", "turma": "E4T", "idade": 44, "pedidos": ["Mochila", "Camiseta tamanho M", "Perfume", "Boné"], "padrinho": ""}, {"n": 64, "nome": "Michele", "turma": "E4T", "idade": 37, "pedidos": ["Necessaire", "Blusinha tamanho GG", "Perfume", "Bolsa"], "padrinho": ""}, {"n": 65, "nome": "Nicolas", "turma": "E4T", "idade": 27, "pedidos": ["Mochila", "Perfume", "Camiseta tamanho G", "Tênis tamanho 39"], "padrinho": ""}, {"n": 66, "nome": "Renata", "turma": "E4T", "idade": 37, "pedidos": ["Mochila", "Necessaire", "Blusa tamanho G"], "padrinho": ""}]}</script>
+<script id="main">
+(function(){
+const STATE = JSON.parse(document.getElementById('state').textContent);
+const PRISTINE = { main: document.getElementById('main').textContent };
+const $ = s => document.querySelector(s);
+let filter = 'free', query = '', adminOn = false, artifactNs = null, current = null;
+
+function phoneFmt(p){ const d=p.replace(/\D/g,''); return '+'+d.slice(0,2)+' '+d.slice(2,4)+' '+d.slice(4,-4)+'-'+d.slice(-4); }
+$('#foot-phone').textContent = phoneFmt(STATE.whatsapp);
+$('#dlg-phone').textContent = phoneFmt(STATE.whatsapp);
+
+function norm(s){ return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(); }
+function matches(c){
+  if (filter==='free' && c.padrinho) return false;
+  if (filter==='kids' && c.idade>12) return false;
+  if (filter==='teen' && (c.idade<13||c.idade>17)) return false;
+  if (filter==='adult' && c.idade<18) return false;
+  if (!query) return true;
+  const q = norm(query);
+  return norm(c.nome).includes(q) || c.pedidos.some(p=>norm(p).includes(q)) || String(c.n)===q;
+}
+function el(tag, cls, text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+
+function render(){
+  const total = STATE.cartas.length, adopted = STATE.cartas.filter(c=>c.padrinho).length;
+  $('#free-count').textContent = total-adopted;
+  $('#adopted-count').textContent = adopted + ' de ' + total + ' já adotadas';
+  $('#bar').style.width = (adopted/total*100)+'%';
+  const g = $('#grid'); g.textContent='';
+  const list = STATE.cartas.filter(matches);
+  if (!list.length){ g.append(el('p','empty', filter==='free' && !query ? 'Todas as cartinhas já têm padrinho. Obrigado! ♥' : 'Nenhuma cartinha encontrada com esse filtro.')); return; }
+  list.forEach((c,i)=>{
+    const a = el('article','letter'+(c.padrinho?' adopted':''));
+    a.style.setProperty('--tilt', ((c.n*37)%5-2)*0.45+'deg');
+    const st = el('div','stamp'); st.append(el('small',null,'Nº'), el('span',null,String(c.n))); a.append(st);
+    const who = el('div','who');
+    who.append(el('div','hi','Querido Papai Noel, sou'), el('h2',null,c.nome), el('div','meta', c.idade+' anos · Turma '+c.turma));
+    a.append(who);
+    a.append(el('p','wish-title','Neste Natal eu gostaria de:'));
+    const ul = el('ul','wishes'); c.pedidos.forEach(p=>ul.append(el('li',null,p))); a.append(ul);
+    const act = el('div','actions');
+    if (c.padrinho){
+      const m = el('div','adopted-mark','Adotada'); m.append(el('small',null,'por '+c.padrinho)); a.append(m);
+    } else {
+      const b = el('button','btn btn-primary','Quero adotar esta cartinha'); b.type='button'; b.onclick=()=>openDlg(c); act.append(b);
+    }
+    const sh = el('button','btn btn-ghost','Compartilhar'); sh.type='button'; sh.onclick=()=>openDlg(c,true); act.append(sh);
+    if (adminOn) act.append(adminBox(c));
+    a.append(act); g.append(a);
+  });
+}
+
+function adminBox(c){
+  const box = el('div','admin');
+  const id = 'adm-'+c.n;
+  const lab = el('label',null, c.padrinho ? 'Padrinho/madrinha' : 'Marcar como adotada'); lab.htmlFor=id;
+  const row = el('div','admin-row');
+  const inp = el('input'); inp.id=id; inp.placeholder='Nome do padrinho'; inp.value=c.padrinho||'';
+  const save = el('button','btn btn-pine', c.padrinho?'Salvar':'Adotada'); save.type='button';
+  save.onclick=()=>{ const v=inp.value.trim(); if(!v){ toast('Escreva o nome do padrinho'); inp.focus(); return; } c.padrinho=v; persist('Cartinha nº '+c.n+' marcada como adotada'); };
+  row.append(inp, save);
+  box.append(lab,row);
+  if (c.padrinho){ const u=el('button','btn btn-ghost','Liberar cartinha'); u.type='button'; u.onclick=()=>{ c.padrinho=''; persist('Cartinha nº '+c.n+' liberada'); }; box.append(u); }
+  return box;
+}
+
+function buildDoc(){
+  const reset = (document.head.querySelector('style')||{}).textContent||'';
+  const json = JSON.stringify(STATE).replace(/</g,'\\u003c');
+  const tplHead = document.getElementById('tpl-head').textContent;
+  return '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+reset+'</style></head><body>'
+    + tplHead
+    + '<script id="state" type="application/json">'+json+'<\/script>\n<script id="main">'+PRISTINE.main+'<\/script>\n'
+    + '<script id="tpl-head" type="text/plain">'+tplHead+'<\/script>'
+    + '</body></html>';
+}
+let saving=false;
+async function persist(msg){
+  render();
+  if (!artifactNs || saving) return;
+  saving=true;
+  try { await artifactNs.publish(buildDoc()); toast(msg); }
+  catch(e){ toast(e && e.code==='conflict' ? 'Outra pessoa salvou ao mesmo tempo. A página foi atualizada; tente de novo.' : 'Não foi possível salvar. Tente de novo.'); }
+  finally { saving=false; }
+}
+
+function waMessage(c, name){
+  return 'Olá! Quero ser '+(name?name+', ':'')+'padrinho/madrinha da cartinha nº '+c.n+' – '+c.nome+' ('+c.idade+' anos, turma '+c.turma+') da campanha de Natal do CEREPAL. 🎄';
+}
+function shareText(c){
+  return '🎄 Cartinhas do Papai Noel – CEREPAL 2026\n\nCartinha nº '+c.n+': '+c.nome+', '+c.idade+' anos\nPedidos:\n'+c.pedidos.map(p=>'• '+p).join('\n')+'\n\nAdote uma cartinha e faça o Natal de alguém mais feliz! Veja todas no link da campanha.';
+}
+function updatePreview(){
+  if(!current) return;
+  const msg = waMessage(current, $('#godname').value.trim());
+  $('#msg-preview').textContent = msg;
+  $('#wa-link').href = 'https://wa.me/'+STATE.whatsapp.replace(/\D/g,'')+'?text='+encodeURIComponent(msg);
+}
+function openDlg(c, shareOnly){
+  current = c;
+  $('#dlg-title').textContent = shareOnly ? 'Compartilhar a cartinha de '+c.nome : 'Adotar a cartinha de '+c.nome;
+  $('#dlg-sub').textContent = shareOnly ? 'Mande para amigos e família. Quem sabe alguém adota?' : 'Mande uma mensagem para a organização reservar a cartinha nº '+c.n+' para você. Você pode dar um ou mais dos pedidos.';
+  ['#godname','#msg-preview','#wa-link','#copy-msg'].forEach(s=>{ const n=$(s); const f=n.closest('.field')||n; f.hidden = shareOnly || !!c.padrinho; });
+  $('#dlg-phone').parentElement.hidden = shareOnly || !!c.padrinho;
+  updatePreview();
+  const d=$('#dlg'); if (d.showModal) d.showModal(); else d.setAttribute('open','');
+}
+$('#godname').addEventListener('input', updatePreview);
+$('#dlg-form').addEventListener('submit', e=>{ e.preventDefault(); $('#dlg').close ? $('#dlg').close() : $('#dlg').removeAttribute('open'); });
+
+function copy(text, okMsg){
+  const done=()=>toast(okMsg);
+  try { navigator.clipboard.writeText(text).then(done, ()=>fallbackCopy(text,okMsg)); } catch(e){ fallbackCopy(text,okMsg); }
+}
+function fallbackCopy(text,okMsg){
+  const t=document.createElement('textarea'); t.value=text; t.style.position='fixed'; t.style.opacity='0'; document.body.append(t); t.select();
+  let ok=false; try{ ok=document.execCommand('copy'); }catch(e){}
+  t.remove(); toast(ok?okMsg:'Não deu para copiar automaticamente. Selecione o texto e copie.');
+}
+$('#copy-msg').onclick=()=>copy($('#msg-preview').textContent,'Mensagem copiada');
+$('#share-text').onclick=()=>copy(shareText(current),'Convite copiado. É só colar no WhatsApp');
+
+let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,2800); }
+
+document.querySelectorAll('.chip[data-f]').forEach(b=>b.onclick=()=>{ filter=b.dataset.f; document.querySelectorAll('.chip[data-f]').forEach(x=>x.setAttribute('aria-pressed', String(x===b))); render(); });
+$('#q').addEventListener('input', e=>{ query=e.target.value.trim(); render(); });
+$('#admin-toggle').onclick=()=>{ adminOn=!adminOn; $('#admin-toggle').setAttribute('aria-pressed',String(adminOn)); if(adminOn){ filter='all'; document.querySelectorAll('.chip[data-f]').forEach(x=>x.setAttribute('aria-pressed', String(x.dataset.f==='all'))); } render(); };
+
+/* imagem da cartinha para compartilhar */
+function wrapLines(ctx, text, maxW){ const words=text.split(' '); const lines=[]; let l=''; words.forEach(w=>{ const t=l?l+' '+w:w; if(ctx.measureText(t).width>maxW && l){ lines.push(l); l=w; } else l=t; }); if(l) lines.push(l); return lines; }
+async function cardImage(c){
+  try{ await document.fonts.ready; }catch(e){}
+  const W=1080,H=1350, cv=document.createElement('canvas'); cv.width=W; cv.height=H; const x=cv.getContext('2d');
+  x.fillStyle='#0f2a22'; x.fillRect(0,0,W,H);
+  for(let i=0;i<120;i++){ x.fillStyle='rgba(238,244,241,'+(0.15+((i*53)%40)/100)+')'; x.beginPath(); x.arc((i*197)%W,(i*311)%H,2+(i%4),0,7); x.fill(); }
+  x.fillStyle='#e8b54a'; x.font='800 34px "Nunito Sans", sans-serif'; x.fillText('CEREPAL · CARTINHAS DO PAPAI NOEL 2026',80,120);
+  const px=80,py=170,pw=W-160,ph=1030; x.fillStyle='#fbfaf5'; x.fillRect(px,py,pw,ph);
+  x.strokeStyle='#dfe6ef'; x.lineWidth=2; for(let y=py+330;y<py+ph-40;y+=58){ x.beginPath(); x.moveTo(px+40,y); x.lineTo(px+pw-40,y); x.stroke(); }
+  x.fillStyle='#c0392b'; x.fillRect(px+pw-190,py+40,140,160); x.fillStyle='#fbfaf5'; x.textAlign='center'; x.font='800 24px "Nunito Sans", sans-serif'; x.fillText('Nº',px+pw-120,py+95); x.font='64px "Young Serif", Georgia, serif'; x.fillText(String(c.n),px+pw-120,py+170); x.textAlign='left';
+  x.fillStyle='#5b6a63'; x.font='700 46px Caveat, cursive'; x.fillText('Querido Papai Noel, sou',px+60,py+110);
+  x.fillStyle='#23302b'; x.font='76px "Young Serif", Georgia, serif'; x.fillText(c.nome,px+60,py+200);
+  x.fillStyle='#5b6a63'; x.font='600 32px "Nunito Sans", sans-serif'; x.fillText(c.idade+' anos · Turma '+c.turma,px+60,py+255);
+  x.fillStyle='#962a1f'; x.font='700 46px Caveat, cursive'; x.fillText('Neste Natal eu gostaria de:',px+60,py+320);
+  x.fillStyle='#1d3b6b'; x.font='700 50px Caveat, cursive'; let y=py+378;
+  c.pedidos.forEach(p=>{ wrapLines(x,'✶ '+p,pw-140).forEach(l=>{ x.fillText(l,px+60,y); y+=58; }); });
+  x.fillStyle='#eef4f1'; x.textAlign='center'; x.font='800 38px "Nunito Sans", sans-serif'; x.fillText('Adote esta cartinha! WhatsApp '+phoneFmt(STATE.whatsapp),W/2,H-70);
+  return new Promise(r=>cv.toBlob(r,'image/png'));
+}
+
+/* neve */
+(function(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cv=$('#snow'), x=cv.getContext('2d'); let W,H,flakes=[];
+  function size(){ W=cv.width=innerWidth; H=cv.height=innerHeight; flakes=Array.from({length:Math.min(90,Math.round(W/12))},()=>({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*2.4,s:.3+Math.random()*.8,d:Math.random()*6})); }
+  size(); addEventListener('resize',size);
+  (function tick(t){ x.clearRect(0,0,W,H); x.fillStyle='#eef4f1'; flakes.forEach(f=>{ f.y+=f.s; f.x+=Math.sin(t/1600+f.d)*.35; if(f.y>H){f.y=-4;f.x=Math.random()*W;} x.beginPath(); x.arc(f.x,f.y,f.r,0,7); x.fill(); }); requestAnimationFrame(tick); })(0);
+})();
+
+render();
+
+/* imagem da cartinha: download direto */
+$('#share-img').hidden=false;
+$('#share-img').onclick=async()=>{ try{ const blob=await cardImage(current); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='cartinha-'+current.n+'-'+norm(current.nome).replace(/[^a-z0-9]+/g,'-')+'.png'; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); }catch(e){ toast('Não foi possível gerar a imagem.'); } };
+
+/* status das adoções vindo de uma planilha Google publicada (opcional) */
+const SHEET_CSV_URL = ''; // cole aqui o link de "Publicar na Web" em formato CSV (aba com as colunas Nº e Padrinho)
+function parseCSV(t){ const rows=[]; let r=[],f='',q=false; for(let i=0;i<t.length;i++){ const ch=t[i]; if(q){ if(ch=='"'){ if(t[i+1]=='"'){f+='"';i++;} else q=false; } else f+=ch; } else if(ch=='"') q=true; else if(ch==','){ r.push(f); f=''; } else if(ch=='\n'){ r.push(f); rows.push(r); r=[]; f=''; } else if(ch!='\r') f+=ch; } if(f||r.length){ r.push(f); rows.push(r); } return rows; }
+if (SHEET_CSV_URL){
+  fetch(SHEET_CSV_URL+(SHEET_CSV_URL.includes('?')?'&':'?')+'t='+Date.now()).then(r=>r.text()).then(t=>{
+    const rows=parseCSV(t); const hd=rows.shift().map(x=>norm(x).trim());
+    const iN=hd.findIndex(x=>x.startsWith('n')), iP=hd.findIndex(x=>x.startsWith('padrinho'));
+    if(iN<0||iP<0) return;
+    const map={}; rows.forEach(r=>{ const n=parseInt(r[iN],10); if(n) map[n]=(r[iP]||'').trim().split(/\s+/)[0]||''; });
+    STATE.cartas.forEach(c=>{ if(c.n in map) c.padrinho=map[c.n]; });
+    render();
+  }).catch(()=>{});
+}
+})();
+</script>
+
+</body>
+</html>
