@@ -266,7 +266,7 @@ function waMessage(c, name){
 }
 const SITE_URL='https://brunoicardoso.github.io/cartinhas/';
 function shareText(c){
-  return '🎄 Cartinhas do Papai Noel – CEREPAL 2026\n\nCartinha nº '+c.n+': '+c.nome+', '+c.idade+' anos\nPedidos:\n'+c.pedidos.map(p=>'• '+p).join('\n')+'\n\nAdote uma cartinha e faça o Natal de alguém mais feliz! Veja todas as cartinhas e escolha a sua:\n'+SITE_URL;
+  return '🎄 Cartinhas do Papai Noel – CEREPAL 2026\n\nCartinha nº '+c.n+': '+c.nome+', '+c.idade+' anos\nPedidos:\n'+c.pedidos.map(p=>'• '+p).join('\n')+'\n\nPara adotar esta cartinha, chame a organização no WhatsApp '+phoneFmt(STATE.whatsapp)+':\nhttps://wa.me/'+STATE.whatsapp.replace(/\D/g,'')+'\n\nVeja todas as cartinhas e escolha a sua:\n'+SITE_URL;
 }
 function updatePreview(){
   if(!current) return;
