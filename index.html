@@ -100,6 +100,8 @@ dialog::backdrop{background:rgba(5,20,15,.72)}
 .dlg p{margin:0;color:var(--ink-soft)}
 .dlg .field{display:flex;flex-direction:column;gap:4px}
 .dlg label{font-size:13px;font-weight:800;color:var(--ink)}
+.field-err{font-size:13px;color:var(--berry-deep);font-weight:700}
+.dlg input[aria-invalid="true"]{border-color:var(--berry)}
 .dlg input{font:inherit;padding:10px 12px;border:1px solid #c9d2cd;border-radius:6px;background:#fff;color:var(--ink)}
 .dlg .row{display:flex;flex-wrap:wrap;gap:8px}
 .dlg .row .btn{flex:1 1 180px}
@@ -158,7 +160,7 @@ footer{padding-block:20px 50px;color:#9fbcb0;font-size:14px;border-top:1px solid
   <form class="dlg" id="dlg-form" method="dialog" novalidate>
     <h3 id="dlg-title"></h3>
     <p id="dlg-sub"></p>
-    <div class="field"><label for="godname">Seu nome</label><input id="godname" autocomplete="name" placeholder="Como você quer ser chamado(a)" required></div>
+    <div class="field"><label for="godname">Seu nome</label><input id="godname" autocomplete="name" placeholder="Como você quer ser chamado(a)" aria-describedby="godname-err"><span class="field-err" id="godname-err" hidden>Escreva seu nome para a organização saber quem vai adotar.</span></div>
     <div class="msg-preview" id="msg-preview"></div>
     <div class="row">
       <a class="btn btn-primary" id="wa-link" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
@@ -262,7 +264,7 @@ async function persist(msg){
 }
 
 function waMessage(c, name){
-  return 'Olá! Quero ser '+(name?name+', ':'')+'padrinho/madrinha da cartinha nº '+c.n+' – '+c.nome+' ('+c.idade+' anos, turma '+c.turma+') da campanha de Natal do CEREPAL. 🎄';
+  return 'Olá! '+(name?'Meu nome é '+name+' e quero':'Quero')+' ser padrinho/madrinha da cartinha nº '+c.n+' – '+c.nome+' ('+c.idade+' anos, turma '+c.turma+') da campanha de Natal do CEREPAL. 🎄';
 }
 const SITE_URL='https://brunoicardoso.github.io/cartinhas/';
 function shareText(c){
@@ -280,10 +282,13 @@ function openDlg(c, shareOnly){
   $('#dlg-sub').textContent = shareOnly ? 'Mande para amigos e família. Quem sabe alguém adota?' : 'Mande uma mensagem para a organização reservar a cartinha nº '+c.n+' para você. Você pode dar um ou mais dos pedidos.';
   ['#godname','#msg-preview','#wa-link','#copy-msg'].forEach(s=>{ const n=$(s); const f=n.closest('.field')||n; f.hidden = shareOnly || !!c.padrinho; });
   $('#dlg-phone').parentElement.hidden = shareOnly || !!c.padrinho;
+  $('#godname-err').hidden=true; $('#godname').removeAttribute('aria-invalid');
   updatePreview();
   const d=$('#dlg'); if (d.showModal) d.showModal(); else d.setAttribute('open','');
 }
-$('#godname').addEventListener('input', updatePreview);
+function needName(e){ const i=$('#godname'); if(i.value.trim()) return true; if(e) e.preventDefault(); $('#godname-err').hidden=false; i.setAttribute('aria-invalid','true'); i.focus(); return false; }
+$('#godname').addEventListener('input', ()=>{ updatePreview(); if($('#godname').value.trim()){ $('#godname-err').hidden=true; $('#godname').removeAttribute('aria-invalid'); } });
+$('#wa-link').addEventListener('click', e=>{ needName(e); });
 function closeDlg(){ const d=$('#dlg'); if(d.close) d.close(); else d.removeAttribute('open'); }
 $('#dlg-form').addEventListener('submit', e=>{ e.preventDefault(); closeDlg(); });
 $('#dlg-close').addEventListener('click', closeDlg);
@@ -298,7 +303,7 @@ function fallbackCopy(text,okMsg){
   let ok=false; try{ ok=document.execCommand('copy'); }catch(e){}
   t.remove(); toast(ok?okMsg:'Não deu para copiar automaticamente. Selecione o texto e copie.');
 }
-$('#copy-msg').onclick=()=>copy($('#msg-preview').textContent,'Mensagem copiada');
+$('#copy-msg').onclick=()=>needName() && copy($('#msg-preview').textContent,'Mensagem copiada');
 $('#share-text').onclick=()=>copy(shareText(current),'Convite copiado. É só colar no WhatsApp');
 
 let toastT; function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true,2800); }
