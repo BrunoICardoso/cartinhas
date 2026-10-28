@@ -340,7 +340,7 @@ $('#share-img').hidden=false;
 $('#share-img').onclick=async()=>{ try{ const blob=await cardImage(current); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='cartinha-'+current.n+'-'+norm(current.nome).replace(/[^a-z0-9]+/g,'-')+'.png'; document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); }catch(e){ toast('Não foi possível gerar a imagem.'); } };
 
 /* status das adoções vindo de uma planilha Google publicada (opcional) */
-const SHEET_CSV_URL = ''; // cole aqui o link de "Publicar na Web" em formato CSV (aba com as colunas Nº e Padrinho)
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Ugxr8oaENjYiWr8j-p1hy1IMws7CmUKVU0xhUzQ-l9M/gviz/tq?tqx=out:csv&headers=1&gid=704650946'; // cole aqui o link de "Publicar na Web" em formato CSV (aba com as colunas Nº e Padrinho)
 function parseCSV(t){ const rows=[]; let r=[],f='',q=false; for(let i=0;i<t.length;i++){ const ch=t[i]; if(q){ if(ch=='"'){ if(t[i+1]=='"'){f+='"';i++;} else q=false; } else f+=ch; } else if(ch=='"') q=true; else if(ch==','){ r.push(f); f=''; } else if(ch=='\n'){ r.push(f); rows.push(r); r=[]; f=''; } else if(ch!='\r') f+=ch; } if(f||r.length){ r.push(f); rows.push(r); } return rows; }
 if (SHEET_CSV_URL){
   fetch(SHEET_CSV_URL+(SHEET_CSV_URL.includes('?')?'&':'?')+'t='+Date.now()).then(r=>r.text()).then(t=>{
