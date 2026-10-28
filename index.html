@@ -264,8 +264,9 @@ async function persist(msg){
 function waMessage(c, name){
   return 'Olá! Quero ser '+(name?name+', ':'')+'padrinho/madrinha da cartinha nº '+c.n+' – '+c.nome+' ('+c.idade+' anos, turma '+c.turma+') da campanha de Natal do CEREPAL. 🎄';
 }
+const SITE_URL='https://brunoicardoso.github.io/cartinhas/';
 function shareText(c){
-  return '🎄 Cartinhas do Papai Noel – CEREPAL 2026\n\nCartinha nº '+c.n+': '+c.nome+', '+c.idade+' anos\nPedidos:\n'+c.pedidos.map(p=>'• '+p).join('\n')+'\n\nAdote uma cartinha e faça o Natal de alguém mais feliz! Veja todas no link da campanha.';
+  return '🎄 Cartinhas do Papai Noel – CEREPAL 2026\n\nCartinha nº '+c.n+': '+c.nome+', '+c.idade+' anos\nPedidos:\n'+c.pedidos.map(p=>'• '+p).join('\n')+'\n\nAdote uma cartinha e faça o Natal de alguém mais feliz! Veja todas as cartinhas e escolha a sua:\n'+SITE_URL;
 }
 function updatePreview(){
   if(!current) return;
@@ -320,7 +321,7 @@ async function cardImage(c){
   x.fillStyle='#962a1f'; x.font='700 46px Caveat, cursive'; x.fillText('Neste Natal eu gostaria de:',px+60,py+320);
   x.fillStyle='#1d3b6b'; x.font='700 50px Caveat, cursive'; let y=py+378;
   c.pedidos.forEach(p=>{ wrapLines(x,'✶ '+p,pw-140).forEach(l=>{ x.fillText(l,px+60,y); y+=58; }); });
-  x.fillStyle='#eef4f1'; x.textAlign='center'; x.font='800 38px "Nunito Sans", sans-serif'; x.fillText('Adote esta cartinha! WhatsApp '+phoneFmt(STATE.whatsapp),W/2,H-70);
+  x.fillStyle='#eef4f1'; x.textAlign='center'; x.font='800 38px "Nunito Sans", sans-serif'; x.fillText('Adote esta cartinha! WhatsApp '+phoneFmt(STATE.whatsapp),W/2,H-95); x.fillStyle='#e8b54a'; x.font='700 32px "Nunito Sans", sans-serif'; x.fillText(SITE_URL.replace('https://',''),W/2,H-45);
   return new Promise(r=>cv.toBlob(r,'image/png'));
 }
 
