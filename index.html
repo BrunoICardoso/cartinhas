@@ -77,6 +77,8 @@ h1 em{font-style:normal;color:var(--gold)}
 .btn-primary:hover{background:var(--berry-deep)}
 .btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--paper-line);font-weight:600;font-size:14px;padding:8px 12px}
 .btn-ghost:hover{color:var(--ink);border-color:var(--ink-soft)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-ghost:disabled:hover{color:var(--ink-soft);border-color:var(--paper-line)}
 .letter.adopted .wishes{opacity:.55}
 .adopted-mark{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-12deg);border:4px double var(--berry);color:var(--berry);
   font-family:var(--f-display);font-size:26px;padding:6px 16px;border-radius:8px;background:rgba(251,250,245,.86);text-align:center;line-height:1.1;pointer-events:none;white-space:nowrap}
@@ -223,7 +225,9 @@ function render(){
     } else {
       const b = el('button','btn btn-primary','Quero adotar esta cartinha'); b.type='button'; b.onclick=()=>openDlg(c); act.append(b);
     }
-    const sh = el('button','btn btn-ghost','Compartilhar'); sh.type='button'; sh.onclick=()=>openDlg(c,true); act.append(sh);
+    const sh = el('button','btn btn-ghost', c.padrinho ? 'Já adotada' : 'Compartilhar'); sh.type='button';
+    if (c.padrinho){ sh.disabled=true; sh.title='Esta cartinha já tem padrinho'; } else sh.onclick=()=>openDlg(c,true);
+    act.append(sh);
     if (adminOn) act.append(adminBox(c));
     a.append(act); g.append(a);
   });
